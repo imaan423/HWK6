@@ -1,26 +1,24 @@
 import urllib.request as ur
 from bs4 import *
 
-url = input('Enter URL: ')
-if len(url) < 1:
-    url = "http://py4e-data.dr-chuck.net/known_by_Alesha.html"
-count = int(input('Enter count: '))
-pos = int(input('Enter position: ')) - 1
+website = input('Type in URL: ')
+repeat = int(input('How many times would you like to repeat this: '))
+position = int(input('Enter the position: ')) - 1
 taglist = list()
 urllist = list()
-urllist.append(url)
+urllist.append(website)
 
 print ('Retrieving: ', urllist[0])
 
 
-for i in range(count):
-    html = ur.urlopen(urllist[-1]).read()
-    soup = BeautifulSoup(html,"lxml")
+for i in range(repeat):
+    opening = ur.urlopen(urllist[-1]).read()
+    soup = BeautifulSoup(opening,"lxml")
     tags = soup('a')
     taglist = list()
     for tag in tags:
         taglist.append(tag)
-    url = taglist[pos].get('href', None)
+    url = taglist[position].get('href', None)
     print ('Retrieving: ', url)
     urllist.append(url)
 
